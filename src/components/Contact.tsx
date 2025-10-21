@@ -52,7 +52,7 @@ export default function Contact() {
       } else {
         setResult({ ok: false, msg: 'Gửi thất bại. Vui lòng thử lại sau.' });
       }
-    } catch (err) {
+    } catch {
       setResult({ ok: false, msg: 'Có lỗi kết nối. Vui lòng thử lại.' });
     } finally {
       setSubmitting(false);

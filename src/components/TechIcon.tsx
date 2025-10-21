@@ -51,11 +51,9 @@ function resolveSlugFromName(name: string): string | null {
   return techToSlug[lower] ?? null;
 }
 
-function iconUrlForSlug(slug: string): string | null {
+function iconUrlForSlug(slug: string): string {
   // Devicon provides many, some like express are monochrome; still acceptable
   const deviconUrl = `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${slug}/${slug}-original.svg`;
-  // Some slugs need alternative style suffixes
-  const altDeviconUrl = `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${slug}/${slug}-plain.svg`;
   // We will optimistically use original; if it 404s the browser shows broken image; to avoid that, we rely on onError to swap
   return deviconUrl;
 }
@@ -69,7 +67,7 @@ export default function TechIcon({ name, size = 18, className, title }: TechIcon
       </span>
     );
   }
-  const src = iconUrlForSlug(slug);
+  const src = iconUrlForSlug(slug) || undefined;
   return (
     <img
       className={`tech-icon ${className ?? ''}`}
